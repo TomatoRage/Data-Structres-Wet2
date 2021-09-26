@@ -21,7 +21,7 @@ public:
     void DeleteLabel(int pixel,int label);
     int GetHighestScoredLabel(int pixel);
     void UniteSuperPixels(int pixel1,int pixel2);
-    int GetID();
+    int GetID() const;
     void SetID(int ID);
 
     class SameSPException{};

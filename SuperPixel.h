@@ -13,7 +13,7 @@ public:
     SuperPixel();
     void InsertTag(int tag,int score);
     void DeleteTag(int tag);
-    int GetMaxScore(int* score);
+    int GetMaxScore(int* score) const;
     void ResetIterator();
     int NextIteration(int* score);
     int GetNumOfTags();

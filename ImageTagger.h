@@ -6,12 +6,17 @@
 class ImageTagger {
     Image** images;
     bool* deletedArray;
-    int Size = 31;
+    int Size = 251;
     int TotalPixels;
     int CurrentTotalImages;
-    const int ResizeRatio = 0.75;
+    int DeleteActionCounter;
+    int HashFunctionMod = Size;
+    const int RehashMultiplier = 1;
+    const double ResizeRatio = 0.5;
 
     void InsertHash(int key,Image* image);
+    int FindHash(int imageID);
+    static int FindNextPrime(int start);
 
 public:
     ImageTagger(int pixels);
@@ -22,8 +27,11 @@ public:
     void RemoveLabel(int ImageID,int pixel,int label);
     int GetHighestScore(int ImageID,int pixel);
     void MergeSuperPixels(int ImageID,int pixel1,int pixel2);
+    int GetNumOfPixels() const;
 
     class ImageAlreadyExistsException{};
+    class ImageNotFoundException{};
+
 };
 
 

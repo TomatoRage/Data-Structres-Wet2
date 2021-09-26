@@ -6,6 +6,7 @@ Image::Image(int pixels):Pixels(new FlippedTreeNode[pixels]),NumOfPixels(pixels)
         Pixels[i].index = i;
         Pixels[i].SP = new SuperPixel;
         Pixels[i].TotalSons = 0;
+        ImageID = -1;
     }
 }
 
@@ -20,7 +21,7 @@ Image::Image(int ImageID,int pixels):Pixels(new FlippedTreeNode[pixels]),NumOfPi
 
 Image::~Image() {
     for(int i = 0; i < NumOfPixels; i++){
-        delete Pixels->SP;
+        delete Pixels[i].SP;
     }
     delete[] Pixels;
 }
@@ -102,7 +103,7 @@ void Image::UniteSuperPixels(int pixel1, int pixel2) {
 
 }
 
-int Image::GetID() {
+int Image::GetID() const {
     return ImageID;
 }
 

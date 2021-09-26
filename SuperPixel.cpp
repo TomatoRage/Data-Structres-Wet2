@@ -29,7 +29,6 @@ void SuperPixel::InsertTag(int tag, int score) {
             MaxScore = TotalScore;
         }
     }
-
 }
 
 void SuperPixel::DeleteTag(int tag) {
@@ -59,7 +58,7 @@ void SuperPixel::DeleteTag(int tag) {
 
 }
 
-int SuperPixel::GetMaxScore(int *score) {
+int SuperPixel::GetMaxScore(int *score) const {
     *score = MaxScore;
     return MaxTag;
 }
@@ -81,13 +80,14 @@ int SuperPixel::GetNumOfTags() {
 
 void SuperPixel::MergeSuperPixel(SuperPixel* SP) {
 
-    int tag,scoreToAdd,MergingSize = SP->GetNumOfTags();
+    int tag,scoreToAdd,counter = 0,MergingSize = SP->GetNumOfTags();
     SP->ResetIterator();
 
-    for(int i = 0; i < Tags.GetSize();i++){
+    for(int i = 0; i < MergingSize;i++){
         tag = SP->NextIteration(&scoreToAdd);
         try{
             InsertTag(tag,scoreToAdd);
+            counter ++;
         }catch(BST<int,int>::FailureException& e){
             int score = Tags.Find(tag);
             scoreToAdd += score;
@@ -98,4 +98,5 @@ void SuperPixel::MergeSuperPixel(SuperPixel* SP) {
             MaxTag = tag;
         }
     }
+    #warning("Fix complexity")
 }
